@@ -1,0 +1,57 @@
+class Library():
+    def __init__(self,list):
+        self.books_available =list
+        self.books_list=list  #creating a variable to store the list
+        self.books_lend = {}      #key:bookname , value :lender
+
+    def display_available_books(self):
+        for book in self.books_available:
+            print(book)
+
+    def display_all_books(self):
+        for book in self.books_list:
+            print(book)
+
+    def borrow_book(self,name,book):
+        if book not in self.books_list:
+            print("Incorrect name. Please check book list")
+            return
+        if book in self.books_available:
+            self.books_lend.update({book:name})
+            self.books_available.remove(book)
+            print("You can take the book")
+        else:
+            print("Your book is already taken by "+self.books_lend[name])
+
+
+    def return_book(self,book):
+        self.books_available.append(book)
+        del self.books_lend[book]
+
+
+lib = Library(["Wings of fire", "Love", "Romeo Juliet", "Poliitics today","Harry Potter"])
+print("Welcome to library. Enter a option")
+while True:
+        print("1.Display available books")
+        print("2.Display all books")
+        print("3.Borrow a book")
+        print("4.Return a book")
+        print("5.Quit")
+        user_input= int(input("Enter here:"))
+        if user_input ==1:
+            lib.display_available_books()
+        elif user_input==2:
+            lib.display_all_books()
+        elif user_input==3:
+            name = input("Enter the name: ")
+            book = input("Enter the book name: ")
+            lib.borrow_book(name,book)
+        elif user_input == 4:
+            book_name = input("Enter the name of the book: ")
+            lib.return_book(book_name)
+        elif user_input == 5:
+            break
+        else :
+            print("Invalid choice")
+
+
